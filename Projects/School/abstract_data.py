@@ -1,4 +1,5 @@
 # given a tuple of points, create abstraction for points:
+#testing to see if i can push 
 
 def makePoint(x,y):
 # write function to pull out value of ur functions
