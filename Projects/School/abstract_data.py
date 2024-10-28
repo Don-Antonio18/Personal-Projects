@@ -13,7 +13,7 @@ def YCoord(pt):
 
 # in order to create a new point as tuple:
 new_point = makePoint(2, 4)
-print (new_point)
+print (new_point) 
 
 # return coordinates 
 print (XCoord(new_point))
