@@ -1,7 +1,7 @@
 import random
 # S & P 500 RETURNS AROUND 11% PER YEAR ON AVERAGE, WHICH IS 0.02739726027 PERCENT PER DAY
-# THIS PROGRAM CALCULATES ROI ON A $100 INVESTMENT PER DAY
-# AVERAGE AMOUNT OF DAYS WORKED OVER A LIFETIME IS 90,000 HOURS, OR 3715 DAYS
+# THIS PROGRAM CALCULATES ROI for n days based on inputted INVESTMENT  amount PER DAY
+# in future programme should api from investment project to detect stock history and predict future trend
 
 #user enters how many days they invested for 
 def ROI(days_invested,amt_invested):
