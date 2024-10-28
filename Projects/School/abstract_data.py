@@ -4,31 +4,31 @@ def makePoint(x,y):
 # write function to pull out value of ur functions
   return (x,y)
 
-def x_coordinate(pt):
+def XCoord(pt):
   return pt[0]
 
-def y_coordinate(pt):
+def YCoord(pt):
   return pt[1]
 
 # in order to create a new point as tuple:
 new_point = makePoint(2, 4)
-return new_point
+print (new_point)
 
 # return coordinates 
-return Xcoord(new_point)
-return Ycoord(new_point)
+print (XCoord(new_point))
+print (YCoord(new_point))
 
 #create start and end segments
 def segStart(segment):
   return segment[0]
 
 def segEnd(segment):
-  return segmentt[1]
+  return segment[1]
   
 # a LINE SEGMENT is a pair of points:
 def makeSegment(start, end):
   # return points as tuple:
-  return newpoint(start) + newpoint(end)
+  return new_point(start) + new_point(end)
 
 # create two lines:
 point1 = makePoint(1,2)
