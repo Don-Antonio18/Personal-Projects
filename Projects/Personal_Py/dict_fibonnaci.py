@@ -22,7 +22,9 @@
 
 
 	#code creates empty python dictionary 
+import sys
 def fibonacci(n,  dictionary ={}): 
+	sys.setrecursionlimit(999999999)
 	n = int(n)
 		#checks to see if n index is in dictionary
 	if n in dictionary: 
