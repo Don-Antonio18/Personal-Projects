@@ -41,10 +41,12 @@ def get_grades(coursecode):
     
     while len(coursecode) != 8:
         coursecode = input("Code too short; enter again. ")
+        
     if coursecode[-1] == "6":
         grade_sum = sum(std[2][0][1][0:5])
         all_caps = all_caps = coursecode[0:4].upper()
         return f"Course:{all_caps}{coursecode[5:9]} , Grade:{grade_sum}"
+        
     elif coursecode[-1] == "7" : #and len(coursecode) == 7
         grade_sum = sum(std[2][1][1][0:5])
         all_caps = coursecode[0:4].upper()
