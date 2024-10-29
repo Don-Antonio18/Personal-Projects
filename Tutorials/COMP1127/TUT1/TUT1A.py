@@ -28,8 +28,8 @@ def student_info(idnum):
         return (f" ID: {idnum}, Last Name: {std[1][0]}, First Name: {std[1][2]} ")
     return "Invalid ID Number."
         
-#id = int(input("Enter Student ID: "))
-#print (student_info(id))
+id = int(input("Enter Student ID: "))
+print (student_info(id))
 
 '''
 # 1C: Write a function get_grades which given the student list above and a course code
@@ -48,7 +48,7 @@ def get_grades(coursecode):
     elif coursecode[-1] == "7" : #and len(coursecode) == 7
         grade_sum = sum(std[2][1][1][0:5])
         all_caps = coursecode[0:4].upper()
-        return f"Course: {all_caps}{coursecode[5:9]},Grade: {grade_sum}"
+        return f"Course: {all_caps}{coursecode[5:9]}, Grade: {grade_sum}"
     else:
         return "Invalid Course Code."
     
