@@ -14,11 +14,11 @@ def memory_struct():
         std[1][2] = "John"
 
     std[2] = [["COMP1126",[20,10,23,54]]
-        std[2][0][0] = "COMP1126"
-        std[2][0][1] = [20,10,23,54]
+        std[2][0] = "COMP1126"
+        std[2][1] = [20,10,23,54]
         
-        std[2][1][0] = "COMP1127"
-        std[2][1][1] = [3,6,11,60]
+        std[3][0] = "COMP1127"
+        std[3][1] = [3,6,11,60]
     '''
 
 # 1B Give statements in python which will return id, last name and first name of std. '''
@@ -28,8 +28,8 @@ def student_info(idnum):
         return (f" ID: {idnum}, Last Name: {std[1][0]}, First Name: {std[1][2]} ")
     return "Invalid ID Number."
         
-id = int(input("Enter Student ID: "))
-print (student_info(id))
+#id = int(input("Enter Student ID: "))
+#print (student_info(id))
 
 '''
 # 1C: Write a function get_grades which given the student list above and a course code
@@ -37,3 +37,17 @@ returns the corresponding grades summed up.
 >>>get_grades(std, "COMP1127")
 80
 '''
+def get_grades(coursecode):
+    if coursecode in std[2][0]:
+        return sum(std[2][0][1][0:5])
+    elif coursecode in [3][1]: #COURSECODE OUT OF RANGE
+        return sum(std[3][1][0:5])
+    else:
+        return "Invalid Course Code."
+code = input("Enter Course Code: ")  
+print (get_grades(code))
+
+# add code to capitalize all text entered so no error occurs
+
+
+    
