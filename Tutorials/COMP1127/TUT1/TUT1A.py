@@ -14,11 +14,11 @@ def memory_struct():
         std[1][2] = "John"
 
     std[2] = [["COMP1126",[20,10,23,54]]
-        std[2][0] = "COMP1126"
-        std[2][1] = [20,10,23,54]
+        std[2][0][0] = "COMP1126"
+        std[2][0][1] = [20,10,23,54]
         
-        std[3][0] = "COMP1127"
-        std[3][1] = [3,6,11,60]
+        std[2][1][0] = "COMP1127"
+        std[2][1][1] = [3,6,11,60]
     '''
 
 # 1B Give statements in python which will return id, last name and first name of std. '''
@@ -38,16 +38,21 @@ returns the corresponding grades summed up.
 80
 '''
 def get_grades(coursecode):
-    if coursecode in std[2][0]:
-        return sum(std[2][0][1][0:5])
-    elif coursecode in [3][1]: #COURSECODE OUT OF RANGE
-        return sum(std[3][1][0:5])
+    
+    while len(coursecode) != 8:
+        coursecode = input("Code too short; enter again. ")
+    if coursecode[-1] == "6":
+        grade_sum = sum(std[2][0][1][0:5])
+        all_caps = all_caps = coursecode[0:4].upper()
+        return f"Course:{all_caps}{coursecode[5:9]} , Grade:{grade_sum}"
+    elif coursecode[-1] == "7" : #and len(coursecode) == 7
+        grade_sum = sum(std[2][1][1][0:5])
+        all_caps = coursecode[0:4].upper()
+        return f"Course: {all_caps}{coursecode[5:9]},Grade: {grade_sum}"
     else:
         return "Invalid Course Code."
+    
 code = input("Enter Course Code: ")  
 print (get_grades(code))
 
-# add code to capitalize all text entered so no error occurs
 
-
-    
