@@ -6,18 +6,15 @@ import random
 #user enters how many days they invested for 
 def ROI(days_invested,amt_invested):
     counter = 1
+    rate = random(range(1.02739726027, 0.02739726027 - 1))
     while counter <= days_invested:
         # calculate the ROI for the day
-        # daily investment of $100 = (100 * ( 1 + 0.02739726027)) - 100 ) = 2.739726027 after 1st day
-        daily_roi = amt_invested * (1 + amt_invested) - amt_invested
+        # yearly investment of $100 = (100 * ( 1 + 0.02739726027)) - 100 ) = 2.739726027 after 1st day
+        daily_roi = (amt_invested * (1 + amt_invested)) - amt_invested
+        yearly_investment = amt_invested * (days_invested / 365)
+        total = amt_invested ( pow(1 + rate / 100), yearly_investment)
+        print(f"Total after {years_invested}years = {total:.2f}")
 
-        # print the ROI for the day
-        print(f"\nROI on day {days} after investing ${amt_invested:.2f} is ${daily_roi:,.2f}")
-
-        profit_earned = daily_roi * days
-        print(f"\nStock Value after investing for {days} days is ${amt_invested * (1 + daily_roi) ** days:.2f}")
-
-        # fix calculation for compound return on investment
         
 
         counter += 1
