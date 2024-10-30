@@ -34,3 +34,5 @@ def makeSegment(start, end):
 # create two lines:
 point1 = makePoint(1,2)
 point2 = makePoint(3,4)
+
+
