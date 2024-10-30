@@ -1,26 +1,27 @@
-import random
 # S & P 500 RETURNS AROUND 11% PER YEAR ON AVERAGE, WHICH IS 0.02739726027 PERCENT PER DAY
-# THIS PROGRAM CALCULATES ROI for n days based on inputted INVESTMENT  amount PER DAY
-# in future programme should api from investment project to detect stock history and predict future trend
+# Program simulates return on investment of $(input) after specified period given by user
+# in future, programme should get api from investment project to detect stock history and predict future trend
+#programme should also prompt user to choose which stock market to simulate return on
 
-#user enters how many days they invested for 
-def ROI(days_invested,amt_invested):
-    counter = 1
-    rate = random(range(1.02739726027, 0.02739726027 - 1))
-    while counter <= days_invested:
-        # calculate the ROI for the day
-        # yearly investment of $100 = (100 * ( 1 + 0.02739726027)) - 100 ) = 2.739726027 after 1st day
-        daily_roi = (amt_invested * (1 + amt_invested)) - amt_invested
-        yearly_investment = amt_invested * (days_invested / 365)
-        total = amt_invested ( pow(1 + rate / 100), yearly_investment)
-        print(f"Total after {years_invested}years = {total:.2f}")
-
+# function is defined with days and principal as argument
+import random
+def StockSim(days, principal):
+    FluctRate = random.uniform((0.0274 * 2), ( 0.0274 / 2))
+    TotalReturn = 0 
+    
+    #increments total return per day, randomly fluctuating profit
+    for day in range(int(days)):
+    #eg.DailyReturn = ( 100 + ( 100 * 0.1) ) = 101
+        DailyReturn = principal + (principal * FluctRate)
+        TotalReturn += DailyReturn
         
+    years = days / 360
+    YearlyPrincipal = principal * (days/365)
+    YearlyReturn = principal * ((1 + FluctRate / 100) ** years - 1) * YearlyPrincipal
+        
+    return (f"Total ROI after {days} days of investing is ${TotalReturn:.2f} \n"
+            f" Total ROI after {years:.1}years of investing is {YearlyReturn:.2f}")
 
-        counter += 1
-
-days = int(input("How many days did you invest for?: "))
-amt = float(input("How much $ did you invest per day?: "))
-print (ROI(days,amt))
-
-
+days_input = float(input("How many days did you invest for?: "))
+principal_input = float(input("How much did you invest per day?: "))
+print (StockSim(days_input,principal_input))
