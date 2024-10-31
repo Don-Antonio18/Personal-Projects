@@ -12,5 +12,5 @@ width = int(input("how wise is it: "))
 symbol = input(("what symbol to draw rectangle?: "))
 for i in range(width):
     for j in range(length):
-        print(symbol, end="")
-    print()
+        print(symbol, end="")   # end ="" prevents print from ending w/ new line
+    print() #prints a new line once you exit the inner for loop 
