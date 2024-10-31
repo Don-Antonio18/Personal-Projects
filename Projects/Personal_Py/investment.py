@@ -4,10 +4,12 @@
 #programme should also prompt user to choose which stock market to simulate return on
 
 # function is defined with days and principal as argument
+
+
 import random
 def StockSim(days, principal):
     FluctRate = random.uniform((0.0274 * 2), ( 0.0274 / 2))
-    TotalReturn = 0 
+    TotalReturn = 0
     
     #increments total return per day, randomly fluctuating profit
     for day in range(int(days + 1)):
@@ -24,4 +26,5 @@ def StockSim(days, principal):
 
 days_input = float(input("How many days did you invest for?: "))
 principal_input = float(input("How much did you invest per day?: "))
-print (StockSim(days_input,principal_input))
+print (StockSim(days_input,principal_input, end=""))
+

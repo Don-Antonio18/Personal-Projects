@@ -3,11 +3,11 @@ import pygame
 import time
 import random
 
-snake_speed = 12
+snake_speed = 11
 
 # Window size
-window_x = 300
-window_y = 300
+window_x = 400
+window_y = 400
 
 # defining colors
 black = pygame.Color(0, 0, 0)
