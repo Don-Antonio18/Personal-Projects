@@ -25,11 +25,11 @@ def make_rational(numerator, denominator):
 ''' Complete Rational’s rational number ADT by implementing 
 functions get_numer and get_denum
 that return the numerator and denominator respectively, 
-given a rational number r   ''''
+given a rational number r   '''
 
 #function to make rational num:
 def make_rat(numerator, denominator):
-   # quotient = quotient < denominator (numerator, denominator)
+# quotient = quotient < denominator (numerator, denominator)
    # return [ numerator // quotient,  denominator // q]
     return ["rational", numerator, denominator]
 
