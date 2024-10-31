@@ -7,7 +7,7 @@
 #   print (i, end="")
 
 #declaration of tuple:
-student = ("Antonio", "Kerr", "Feb 4 2006")
+student = ("Antonio", "Kerr", "Feb 4 2006", 6)
         
 # for loop to find location of value in Tuple:
 TrynaFind = input("what are u looking for?: ")
