@@ -10,7 +10,7 @@ def StockSim(days, principal):
     TotalReturn = 0 
     
     #increments total return per day, randomly fluctuating profit
-    for day in range(int(days)):
+    for day in range(int(days + 1)):
     #eg.DailyReturn = ( 100 + ( 100 * 0.1) ) = 101
         DailyReturn = principal + (principal * FluctRate)
         TotalReturn += DailyReturn
