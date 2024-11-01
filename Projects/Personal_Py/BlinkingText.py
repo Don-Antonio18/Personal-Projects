@@ -1,7 +1,6 @@
 import sys
 import time
 
-from investment import *
 def blink_text(text):
     count = 1
     while True:
