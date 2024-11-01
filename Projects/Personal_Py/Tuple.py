@@ -40,7 +40,6 @@ print(green)
 print(yellow)
 print(red)
 
-fruits.
 ''' This will Output:
 'apple', 'banana', ['cherry', 'strawberry', 'raspberry']'''
 
