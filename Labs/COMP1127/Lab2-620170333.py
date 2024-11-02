@@ -20,7 +20,7 @@ def MonthDays(month_input):
     if month_input.capitalize() in calendar: #checks if capitized vr. of input is in dict
         return calendar[month_input.capitalize()] #access days using month string as a key
     else: return []
-print(MonthDays("December"))
+
 
 
 names_of_days = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']
@@ -37,7 +37,7 @@ def week_day(year, month, day):
     DayOfWeek = int(((int(13 * month +3 ) / 5 + day + year + int(year / 4)  - int(year / 100) + int(year / 400)) %7))
     return names_of_days [DayOfWeek]    
 
-print (week_day(2006,2,4))
+
 
 
 def unLucky(year):
@@ -47,7 +47,7 @@ def unLucky(year):
         for month in range(1,13)    # loops through each month of the year
         if week_day(year, month, day) == "Friday" and day == 13 #checks if date is both a friday and the 13th of a month
 ]
-print (unLucky(2006))
+
 
 def so_unLucky():
     start = int(input("Enter starting year:" )) 
