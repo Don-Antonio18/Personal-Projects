@@ -20,7 +20,6 @@ def MonthDays(month_input):
         # code below checks if month in list == to month_input after capitalization
         if month == month_input.capitalize():    
             return days[0]     
-    #return f"The month of '{month_input}' doesn't exist."
     return [] # base case, if list is empty
     
 #month_input = input(("Enter a month to see how many days it has: "))
