@@ -12,18 +12,16 @@ days_in_month = [
     ('November',[30]),
     ('December',[31])
 ]
+
+calendar = {key:value for key, value in days_in_month}
+
 ''' Function that returns # of days in a particular month'''
 def MonthDays(month_input):
-    if month_input.capitalize() == "February":   
-        return days_in_month[1][1]
-    for month, days in days_in_month:           
-        # code below checks if month in list == to month_input after capitalization
-        if month == month_input.capitalize():    
-            return days[0]     
-    return [] # base case, if list is empty
-    
-#month_input = input(("Enter a month to see how many days it has: "))
-print(MonthDays("a"))
+    if month_input.capitalize() in calendar: #checks if capitized vr. of input is in dict
+        return calendar[month_input.capitalize()] #access days using month string as a key
+    else: return []
+print(MonthDays("December"))
+
 
 names_of_days = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']
 

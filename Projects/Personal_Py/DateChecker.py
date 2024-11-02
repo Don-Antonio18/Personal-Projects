@@ -12,19 +12,27 @@ days_in_month = [
     ('November',[30]),
     ('December',[31])
 ]
-''' Function that returns # of days in a particular month'''
+''' Create  Function that returns # of days in a particular month'''
+calendar = {key:value for key, value in days_in_month}
+
+""" Using dictionary:"""
 def MonthDays(month_input):
-    if month_input.capitalize() == "February"   :   return days_in_month[1][1]
+    if month_input.capitalize() in calendar: #checks if capitized vr. of input is in dict
+        return calendar[month_input.capitalize()] #access days using month string as a key
+    else: return f"Month '{month_input}' not found in the calendar."
+month_input = input(("Enter a month to see how many days it has: "))
+print(MonthDays(month_input))
+
+""" Using For Loop: """
+def MonthDays(month_input):
+    if month_input.capitalize() == "February":   
+        return days_in_month[1][1]
     for month, days in days_in_month:           
         # code below checks if month in list == to month_input after capitalization
-        if month == month_input.capitalize()   :    return days[0]     
-    #return f"The month of '{month_input}' doesn't exist."
-    return []
-    
-#month_input = input(("Enter a month to see how many days it has: "))
-print(MonthDays("a"))
+        if month == month_input.capitalize():    
+            return days[0]     
+    return [] # base case, if list is empty
 
-names_of_days = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']
 
 """ Zeller's Congruence is an algorithm for finding the day of the week for any date. 
 Zeller's formula is as follows:
@@ -40,6 +48,9 @@ The result is a day number in the range 0..6 where the corresponding day can
 be extracted from the names_of_days list by using an appropriate index.
 e.g. names_of_days[0] = 'Monday' and names_of_days [6] = 'Sunday'.
 """
+
+names_of_days = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']
+
 # function week_day, which displays the day name for a given date supplied in
 # the form (year, moth, day).
 
