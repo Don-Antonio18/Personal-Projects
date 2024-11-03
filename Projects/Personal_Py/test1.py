@@ -1,4 +1,13 @@
-days_in_month = [ 
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+def so_Unlucky(start, end):
+    daysinmonth = [ 
     ('January',[31]),
     ('February',[28,29]),
     ('March',[31]),
@@ -10,16 +19,18 @@ days_in_month = [
     ('September',[30]),
     ('October',[31]),
     ('November',[30]),
-    ('December',[31])
-]
+    ('December',[31]) ]
 
-calendar = {key:value for key, value in days_in_month}
 
 ''' Function that returns # of days in a particular month'''
 def MonthDays(month_name):
-    if month_name.capitalize() in calendar: #checks if capitized vr. of input is in dict
-        return calendar[month_name.capitalize()] #access days using month string as a key
-    else: return []
+    if month_name.capitalize() == "February":   
+        return days_in_month[1][1]
+    for month, days in days_in_month:           
+        # code below checks if month in list == to month_input after capitalization
+        if month == month_name.capitalize():    
+            return days[0]     
+    return [] # base case, if list is empty
 
 
 
@@ -45,8 +56,7 @@ def unLucky(year):
     return [
         (day, month, year) for day in range(1,32)   #loops through each day of month
         for month in range(1,13)    # loops through each month of the year
-        if week_day(year, month, 13) == "Friday"  #checks if 13th day of each month is a Friday
-        #if week_day(year, month, day) == "Friday" and day == 13 #checks if date is both a friday and the 13th of a month
+        if week_day(year, month, day) == "Friday" and day == 13 #checks if date is both a friday and the 13th of a month
 ]
 
 
@@ -54,8 +64,18 @@ def so_unLucky(start,end):
     # create new list using list comprehension (using multiple lines for clarity)
     ListOfunLuckies = [                        
         years for years in range(start, end + 1)  # counts years for all years in the range of start --> finish
-        if len(unLucky(years)) > 2 # if length of unlucky years list == 3, there are 3 unlucky dates
+        if len(unLucky(years)) == 3 # if length of unlucky years list == 3, there are 3 unlucky dates
     ]                     
-    return ListOfunLuckies
+    return 
 
-2
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    years = list(map(int, input().rstrip().split()))
+
+    answer = so_Unlucky(years[0], years[1])
+
+    fptr.write('['+', '.join(map(str, answer))+']')
+    fptr.write('\n')    
+
+    fptr.close()

@@ -45,8 +45,7 @@ def unLucky(year):
     return [
         (day, month, year) for day in range(1,32)   #loops through each day of month
         for month in range(1,13)    # loops through each month of the year
-        if week_day(year, month, 13) == "Friday"  #checks if 13th day of each month is a Friday
-        #if week_day(year, month, day) == "Friday" and day == 13 #checks if date is both a friday and the 13th of a month
+        if week_day(year, month, day) == "Friday" and day == 13 #checks if date is both a friday and the 13th of a month
 ]
 
 
@@ -54,8 +53,6 @@ def so_unLucky(start,end):
     # create new list using list comprehension (using multiple lines for clarity)
     ListOfunLuckies = [                        
         years for years in range(start, end + 1)  # counts years for all years in the range of start --> finish
-        if len(unLucky(years)) > 2 # if length of unlucky years list == 3, there are 3 unlucky dates
+        if len(unLucky(years)) == 3 # if length of unlucky years list == 3, there are 3 unlucky dates
     ]                     
     return ListOfunLuckies
-
-2
