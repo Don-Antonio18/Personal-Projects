@@ -3,7 +3,7 @@
 # Hackerrank Exercise: Standard Deviation 1
 
 #Code submission from Hackerrank:
-
+import math
 def standDev(a, b, c, d, e, f, g, h, i, j):
     
     #code finds mean 
@@ -34,9 +34,9 @@ def standDev(a, b, c, d, e, f, g, h, i, j):
     sqr_result_j = result_j ** 2
 
     #code adds up all squares
-    sqr_total = (sqr_result_a + sqr_result_b + sqr_result_c + sqr_result_d +
-                 sqr_result_e + sqr_result_f + sqr_result_g + sqr_result_h +
-                 sqr_result_i + sqr_result_j)
+    sqr_total = (sqr_result_a + sqr_result_b + sqr_result_c + sqr_result_d + \
+                sqr_result_e + sqr_result_f + sqr_result_g + sqr_result_h + \
+                sqr_result_i + sqr_result_j)
 
     #code divides by number of data points
     sqr_variance = sqr_total / 10
