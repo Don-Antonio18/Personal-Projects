@@ -4,8 +4,8 @@
 #value: Contains the data for a node. This value must be number. 
 #left:   Contains the details of left node child. 
 #right:  Contains details of the right node child. 
-    
-from binarytree import Node 
+
+from BinaryTree import Node 
 root = Node(3) 
 root.left = Node(6) 
 root.right = Node(8) 

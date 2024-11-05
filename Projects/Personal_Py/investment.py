@@ -26,5 +26,5 @@ def StockSim(days, principal):
 
 days_input = float(input("How many days did you invest for?: "))
 principal_input = float(input("How much did you invest per day?: "))
-print (StockSim(days_input,principal_input, end=""))
+print (StockSim(days_input,principal_input))
 
