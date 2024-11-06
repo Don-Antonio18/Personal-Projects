@@ -1,8 +1,6 @@
 ''' makeQueue: void -> Queue '''
 def makeQueue():
     return ('queue', [])  # tuple containing queue and list
-# q1 = makeQueue()
-# print (q1)
 
 def contents(q):
     return q[1] # returns contents of the argument
@@ -12,9 +10,6 @@ def isQueueValid(obj):
     ''' checks if arg parameters are 'queue' and type:list respectively '''
     return type(obj) == tuple and len(obj) == 2 \
     and obj[0] == "queue" and type(obj[1]) == type([])
-    
-# q2 = ("queue", [1,2,3,4,5])
-# print (isQueueValid(q2))3
 
 ''' check if Queue is empty: '''
 def isQueueEmpty1(obj):
@@ -27,16 +22,24 @@ def isQueueEmpty2(q):
         return contents(q) == []    # returns True if queue is empty
     else:
         raise TypeError("dequeue; arg must be a queue")
-# q3 = ("queue", [])
-# print (isQueueEmpty(q3))
 
 ''' Add elements to queue '''
-def enqueue(q, elmnt):
-    contents(q).append(elmnt)  
+def enqueue(q, el):
+    #adding to the back
+    if isQueueEmpty2(q):
+        contents(q).insert(0,el)
+    else:
+        #raise TypeError, "enqueue: Not a Queue"
+        return TypeError(q, "enqueue: Not a Queue")
+    contents(q).append(el)  
     
 '''Remove elements from queue'''
 def dequeue(q):
-    contents(q).pop(0) #use pop func to remove last elmt from queue
+    # removing from front:
+    if not isQueueEmpty2(q):
+        contents(q).pop() #use pop func to remove last elmt from queue
+    else:
+        raise IndexError("Queue is empty")
     
 '''Idetify front of Queue: '''
 def front(q):
@@ -49,3 +52,13 @@ q = makeQueue()
 contents(q).append("Antonio") 
 contents(q).append("Kerr")  # append adds element to end of queue
 print (q)
+
+q2 = ("queue", [1,2,3,4,5])
+print (isQueueValid(q2))
+
+
+q3 = ("queue", [])
+print (isQueueEmpty2(q3))
+
+
+# ask tabnine to create documentation for every line
