@@ -49,16 +49,19 @@ def front(q):
         raise TypeError("Dequeue; arg must be a queue")
     
 q = makeQueue()
-contents(q).append("Antonio") 
+details = ["Antonio", "is a ", "boy, named: "]
+contents(q).append(details)
 contents(q).append("Kerr")  # append adds element to end of queue
 print (q)
 
 q2 = ("queue", [1,2,3,4,5])
 print (isQueueValid(q2))
+print (q2)
 
 
-q3 = ("queue", [])
+q3 = ("queue", ["Empty"])
 print (isQueueEmpty2(q3))
+print (q3)
 
 
 # ask tabnine to create documentation for every line
