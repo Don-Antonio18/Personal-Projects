@@ -1,4 +1,4 @@
-#to reverse a string, just set the step to be -1
+'''? to reverse a string, just set the step to be -1'''
 # [start:end:step]
 
 reversestring = str(input("Enter text to revese it: "))

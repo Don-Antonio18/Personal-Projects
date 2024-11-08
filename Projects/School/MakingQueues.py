@@ -26,7 +26,7 @@ def isQueueEmpty2(q):
 ''' Add elements to queue '''
 def enqueue(q, el):
     #adding to the back
-    if isQueueEmpty2(q):
+    if isQueueEmpty2(q): # 
         contents(q).insert(0,el)
     else:
         #raise TypeError, "enqueue: Not a Queue"
@@ -65,3 +65,4 @@ print (q3)
 
 
 # ask tabnine to create documentation for every line
+
