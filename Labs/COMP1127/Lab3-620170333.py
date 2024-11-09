@@ -60,7 +60,7 @@ def coAuthors(book):
 
 """ check_price takes isbn & bookshop as input and returns the corresponding
 sale price of the book. If book doesnt exist error msg is printed """
-def check_price(isbn, bookshop):
+def check_price(isbn, bookshop): 
     for book in bookshop[1]:
         if isbn == get_isbn(book):
             return get_Saleprice(book)
