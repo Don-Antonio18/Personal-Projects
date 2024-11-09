@@ -78,12 +78,11 @@ eg. booksToReorder(15, uwiBookshop)
 
 """
 def booksToReorder(reorderlevel, bookshop):
-    reorder_list = []
+    reorderlst = []
     for book in bookshop[1]:
-        if get_Qty(book) >= reorderlevel:
-            #* appends tuple containing 1st and 2nd attributes of book, being isbn and titles respectively.
-            reorder_list.append((book[0]), (book[1])) 
-    return reorder_list
+        if(get_Qty(book) <= reorderlevel):
+            reorderlst.append((get_isbn(book),get_Title(book)))
+    return reorderlst
 
         
 
