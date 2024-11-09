@@ -77,7 +77,7 @@ eg. booksToReorder(15, uwiBookshop)
 ('9780521644082', 'Haskell School of Expr.')]
 
 """
-def booksToReorder(reorderlevel, bookshop)
+def booksToReorder(reorderlevel, bookshop):
     reorder_list = []
     for book in bookshop[1]:
         if get_Qty(book) >= reorderlevel:
