@@ -26,8 +26,10 @@ add_book(b3, uwiBookshop)
 
 """  accessor functions in python which take a book as input and return
 the corresponding attribute of a book. """
+def get_books(bookshop):
+    return bookshop[1]
 
-def get_isbn(book):
+def get_Isbn(book):
     return book[0]
 
 def get_Title(book):
@@ -53,16 +55,18 @@ and returns the list of coauthors if the book is written by multiple authors,
 and returns an empty list if it is single
 authored. """
 def coAuthors(book):
-    if not len(book[2]) >= 2: #base case if author count is NOT >= 2
+    if not len(get_Authors(book)) >= 2: #base case if author count is NOT >= 2
         return []
     else:
-        return book[2][1:]
+        return get_Authors(book)[1:]
+
+
 
 """ check_price takes isbn & bookshop as input and returns the corresponding
 sale price of the book. If book doesnt exist error msg is printed """
 def check_price(isbn, bookshop): 
-    for book in bookshop[1]:
-        if isbn == get_isbn(book):
+    for book in get_books(bookshop):
+        if isbn == get_Isbn(book):
             return get_Saleprice(book)
         else: 
             return "Book not found"
@@ -76,12 +80,19 @@ eg. booksToReorder(15, uwiBookshop)
 [('9780262510875', 'Struc. & Interp of Comp.Prog.'),
 ('9780521644082', 'Haskell School of Expr.')]
 
-"""
 def booksToReorder(reorderlevel, bookshop):
     reorderlst = []
     for book in bookshop[1]:
         if(get_Qty(book) <= reorderlevel):
             reorderlst.append((get_isbn(book),get_Title(book)))
+    return reorderlst
+
+"""
+def booksToReorder(reorderlevel, bookshop):
+    reorderlst = []
+    for book in bookshop[1]:
+        if(get_Qty(book) <= reorderlevel):
+            reorderlst.append((get_Isbn(book),get_Title(book)))
     return reorderlst
 
         
