@@ -2,6 +2,7 @@ import random
 #* ● ┌ ─ ┐ │ └ ┘  
 running = True
 while running == True: 
+    
     dice_dict = { 
             1: ("┌─────────┐", 
                 "│         │",
@@ -46,8 +47,7 @@ while running == True:
         print("Dice Roller Programme terminated successfully.")
         break
     else:
-        orientation = str(input("Press 'v' to see them vertically,\
-                        or 'h' to see them horizontally: "))
+        orientation = str(input("Press 'v' to see them vertically, or 'h' to see them horizontally: "))
         if orientation == "v":
             #!---------Printing Dices Vertically------
 
@@ -85,8 +85,7 @@ while running == True:
             print(f"Total: {total}")
                 
         else:
-            raise ValueError("Orientation Key not recognized.\
-                enter v or h")
+            print("ValueError: Orientation Key not recognized. Enter v or h")
         
             
         # for die in dice:
