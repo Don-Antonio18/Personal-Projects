@@ -1,12 +1,13 @@
 '''write square root of a given perfect square without using inbuilt functions'''
 import math
 def sq_root(x):
-    
-    ans = 0
-    while ans * ans < x:
-        ans += 1
-    return (ans)
+    return (f"The square root of {x} is {x ** 0.5}")
 
 number = int(input("Enter a number and we will calculate its square root: "))
-print(f"The square root of {number} is ",sq_root(number))
-print(f"The square root of {number} is ",math.sqrt(number))
+print (sq_root(number))
+
+#! x to the power of 0.5 gives square root 
+def sqrt(x): return x ** 0.5 
+
+#* function that returns square of a number:
+def sqr(n): return n ** 2
