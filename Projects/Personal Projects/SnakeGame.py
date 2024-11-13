@@ -6,8 +6,8 @@ import random
 snake_speed = 11
 
 # Window size
-window_x = 450
-window_y = 450
+window_x = 600
+window_y = 600
 
 # defining colors
 black = pygame.Color(0, 0, 0)
@@ -21,7 +21,7 @@ blue = pygame.Color(0, 0, 255)
 pygame.init()
 
 # Initialise game window
-pygame.display.set_caption('Snake Eat Dot')
+pygame.display.set_caption('Kayla Eat Dot')
 game_window = pygame.display.set_mode((window_x, window_y))
 
 # FPS (frames per second) controller
