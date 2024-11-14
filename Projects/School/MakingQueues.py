@@ -24,14 +24,14 @@ def isQueueEmpty2(q):
         raise TypeError("dequeue; arg must be a queue")
 
 ''' Add elements to queue '''
-def enqueue(q, el):
+def enqueue(q, elmt):
     #adding to the back
     if isQueueEmpty2(q): # 
         contents(q).insert(0,el)
     else:
         #raise TypeError, "enqueue: Not a Queue"
         return TypeError(q, "enqueue: Not a Queue")
-    contents(q).append(el)  
+    contents(q).append(elmt)  
     
 '''Remove elements from queue'''
 def dequeue(q):
