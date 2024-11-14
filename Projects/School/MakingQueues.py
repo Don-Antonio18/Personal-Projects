@@ -27,7 +27,7 @@ def isQueueEmpty2(q):
 def enqueue(q, elmt):
     #adding to the back
     if isQueueEmpty2(q): # 
-        contents(q).insert(0,el)
+        contents(q).insert(0,elmt)
     else:
         #raise TypeError, "enqueue: Not a Queue"
         return TypeError(q, "enqueue: Not a Queue")
