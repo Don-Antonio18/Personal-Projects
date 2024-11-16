@@ -133,20 +133,11 @@ Example: >>> calcLetterGrade(st1)
 def calcLetterGrade(student):
     # Extracting course list from student structure
     CourseList = get_courses(student)
-
-    #? applies get_ccode func to every course in courselist
-    CourseCodes = my_map(get_ccode, CourseList)
-
-    # Extracting course codes and number grades separately
-    NumberGrades = my_map(get_grade(CourseList))
-
-    #new list in which each number is converted to a letter grade
-    NewListofGrades = my_map(computeLetterGrade, NumberGrades)
-
-    # new courses list with list of courses + list of grades
-    NewListofCourses = list(myzip(CourseList, NewListofGrades))
-
-    return NewListofCourses
+    NumberGrades = [grade[1] for grade in CourseList]
+    CourseCodes = [code[0] for code in CourseList]
+    letterGrades = list(map(computeLetterGrade,NumberGrades))
+    NewCourseList = list(zip(CourseCodes,letterGrades))
+    return NewCourseList
 
 print(calcLetterGrade(st1))
 
