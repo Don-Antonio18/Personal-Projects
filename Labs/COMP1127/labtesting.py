@@ -1,5 +1,5 @@
-''' Details of the student record st1, the dictionaries and functions'''
 
+''' Details of the student record st1, the dictionaries and functions'''
 def myzip(lst1,lst2):
     if lst1 ==[] or lst2 == []:
         return []
@@ -43,15 +43,11 @@ def get_grade(course_det):
     return course_det[1]
 
 #A student record for Jane Doe
-st1 = ('620000101',
+st1 = student('620000101',
         "Jane","Doe",
-        
-        ["COMP1126",80,
-        "COMP1127",60, 
-        "COMP1210",50,
-        "COMP1161",60,
-        "COCR2003",85,
-        "COMP2140",80])
+        ["COMP1126",80, "COMP1127",60, 
+        "COMP1210",50,"COMP1161",60,
+        "COCR2003",85,"COMP2140",80])
 
 #A dictionary of course codes as keys and their corresponding credit values
 credit_list={   'COMP1126':3,
@@ -75,11 +71,11 @@ def my_map(f,lst):
         return [f(lst[0])] + my_map(f, lst[1:])
 
 # A function that prints a student’s details including GPA. It needs function calcGPA
-def print_students_gpa(std):
-#Prints the students details and GPA'''
-    print ("Student Id:", get_id(std))
-    print ("Student name:", get_fname(get_name(std)), get_lname(get_name(std)))
-    print ("GPA: %.2f" %(calcGPA(std)))
+# def print_students_gpa(std):
+# #Prints the students details and GPA'''
+#     print ("Student Id:", get_id(std))
+#     print ("Student name:", get_fname(get_name(std)), get_lname(get_name(std)))
+#     print ("GPA: %.2f" %(calcGPA(std)))
 
 '''Write a function computeLetterGrade() which takes a number grade and returns the
 corresponding letter grade'''
@@ -109,7 +105,7 @@ def computeLetterGrade(Grade):
             return ("F3")
     else:
         raise ValueError("Invalid grade")
-#computeLetterGrade(100)
+#print (computeLetterGrade(100))
 
 '''QUestion 2: Write a function calcLetterGrade() which takes a student as input and returns a list
 of tuples where the first part of the tuple is the course code and second part of 
@@ -131,13 +127,16 @@ Example: >>> calcLetterGrade(st1)
 
 
 def calcLetterGrade(student):
-    # Extracting course list from student structure
+    #* returns a list of tuples of course CODES & GRADES
     CourseList = get_courses(student)
-    NumberGrades = [grade[1] for grade in CourseList]
-    CourseCodes = [code[0] for code in CourseList]
-    letterGrades = list(map(computeLetterGrade,NumberGrades))
-    NewCourseList = list(zip(CourseCodes,letterGrades))
-    return NewCourseList
+    #* extracts the grades part from CourseList (Number Grades)
+    NumberGrades = [grade for grade in CourseList[1]]
+    #NumberGrades = [grade for (code, grade) in CourseList]
+    #$CourseCodes = 
+    #* applies computeLetterGrade func to each index in NumberGrades
+    #letterGrades = list(my_map(computeLetterGrade,NumberGrades))
+    #NewCourseList = list(myzip(CourseCodes,letterGrades))
+    return NumberGrades
 
-print(calcLetterGrade(st1))
+(calcLetterGrade(student))
 
