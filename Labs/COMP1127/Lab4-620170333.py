@@ -59,38 +59,57 @@ def my_map(f,lst):
 
 '''Write a function computeLetterGrade() which takes a number grade and returns the
 corresponding letter grade'''
-def computeLetterGrade(Grade):
+def computeLetterGrade(num_grade):
     #implementing grade function with match case:
-    if Grade > 89:
+    if num_grade > 89:
             return ("A+")
-    elif Grade >= 80:
+    elif num_grade >= 80:
             return ("A")
-    elif Grade >= 75:
+    elif num_grade >= 75:
             return ("A-")
-    elif Grade >= 70:
+    elif num_grade >= 70:
             return ("B+")
-    elif Grade >= 65:
+    elif num_grade >= 65:
             return ("B")
-    elif Grade >= 60:
+    elif num_grade >= 60:
             return ("B-")
-    elif Grade >= 55:
+    elif num_grade >= 55:
             return ("C+")
-    elif Grade >= 50:
+    elif num_grade >= 50:
             return ("C")
-    elif Grade >= 45:
+    elif num_grade >= 45:
             return ("F1")
-    elif Grade >= 40:
+    elif num_grade >= 40:
             return ("F2")
-    elif Grade >= 0:
+    elif num_grade >= 0:
             return ("F3")
     else:
         raise ValueError("Invalid grade")
 
+'''QUestion 2: Write a function calcLetterGrade() which takes a student as input and returns a list
+of tuples where the first part of the tuple is the course code and second part of 
+the tuple is the letter grade
+
+From the student structure, first extract the course list which is a list of tuples of course
+codes and the number grades. 
+
+Get the number grades from the course list and create a new
+list in which each number grade is converted to a letter grade. 
+
+Recreate a new courses list with the list of courses and the list of letter grades. '
+
+Example: >>> calcLetterGrade(st1)
+[('COMP1126', 'A'), ('COMP1127', 'B-'), ('COMP1210', 'C'),
+('COMP1161', 'B-'), ('COCR2003', 'A'), ('COMP2140', 'A')]'''
+#*  Hint: Use my_map to apply a function to every element of the list. Also remember that zip
+#*  takes two lists as inputs and creates a list of tuples e.g.
 
 
-def calcLetterGrade(student):
+
+
+def calcLetterGrade(std):
     # returns a list of tuples of course CODES & GRADES
-    Course_List = get_courses(student)
+    Course_List = get_courses(std)
     
     # underscore (_) indicates that 1st part of tuple isnt needed
     Number_Grades = [grades for (_, grades) in Course_List]
