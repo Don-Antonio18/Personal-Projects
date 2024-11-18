@@ -40,8 +40,8 @@ def getPosition2(aircraft, Queue_Contents):
     #enumerate loop thru  n assigns index for each item
     # hence, two iterables needed. 1 for index, one for plane object
     for plane_position, queued_plane in enumerate(Queue_Contents):
-        #! Ask chatgpt how code is able to retrieve dict val from queued_plane
-        if queued_plane["id"] == aircraft["id"]:
+        
+        if getiD(queued_plane) == getiD(aircraft):
             return plane_position
         
     else: return None
@@ -51,7 +51,7 @@ def addAirCraftToQueue(Priority_Queue, aircraft):
     inserted = False
     if isPriQueueEmpty(Priority_Queue) == False:
         for index in range(len(Priority_Queue)):
-            if aircraft["fuel"] < Priority_Queue[index]["fuel"]:
+            if getFueLvl(aircraft) < getFueLvl(Priority_Queue[index]):
                 Priority_Queue.insert(index, aircraft)
                 inserted = True
                 break
