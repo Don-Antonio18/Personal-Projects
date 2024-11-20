@@ -1,9 +1,17 @@
 name = ("Enter your name: ")
+myList = ['a',1, True]
 
-#returns the number of characters in a string.
+# append.() adds new variable to the end of the string
+newlist1 = myList.append("new string element")
+
+# extend() adds ANOTHER list to a list
+list1 = ['a', 'b', 'c', 2, 3, 4, 6]
+newlist2 = myList.extend(list1)
+
+# len() returns the number of characters in a string.
 length = len(name)
 
-# converts the first character of a string to uppercase and makes all other characters lowercase.
+# capitalize() converts the 1st char of a string to uppercase and makes all other characters lowercase.
 size = name.capitalize()
 
 #returns True if all characters in the string are alphanumeric (either alphabets or numbers).
@@ -26,6 +34,21 @@ result = name.upper()
 
 # The lower() function converts all characters in a string to lowercase.
 result = name.lower()
+
+#   pop() removes last element from list
+list1.pop()
+
+#   insert () replaces position of list with a new element
+list1.insert(4, "four")
+
+#   remove() removes the 1st occurence of a condition
+list1.remove("four")
+
+#   sort() sorts the list in ascending order. Can specify order using conditions
+list1.sort()
+
+# reverse() reverses the list
+list1.reverse()
 
 
 #* the strip() function removes all leading and ending instances of parameter. 
