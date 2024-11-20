@@ -1,3 +1,10 @@
+""" 
+Group information:
+Antonio Kerr: 620170333
+Danecia Watt: 
+"""
+
+
 # PART 1
 def makePacket(srcIP, dstIP, length, prt, sp,dp,sqn, pld):
     return ("PK", srcIP, dstIP, [length, prt, [sp,dp], sqn, pld] )
@@ -15,13 +22,14 @@ def getPacketDetails(pkt):
     return pkt[3] 
 
 def isPacket(pkt):
-    """makes sure input has meets all conditions of packet adt"""
-    return isinstance(pkt, tuple) \
-    and pkt[0] == "PK" \
-    and isinstance(pkt[1], str) \
-    and isinstance(pkt[2], str) \
+    """makes sure input has meets all conditions of packet adt
+        isinstance() takes in (variable, datatype(s)_to_validate) and returns True/False """
+    return isinstance(pkt, tuple)\
+    and pkt[0] == "PK"           \
+    and isinstance(pkt[1], str)  \
+    and isinstance(pkt[2], str)  \
     and isinstance(pkt[3], list) \
-    and len(pkt[3]) == 5 \
+    and len(pkt[3]) == 5         \
     and len(pkt) == 4 
     
 def isEmptyPkt(pkt):
