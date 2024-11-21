@@ -83,8 +83,10 @@ def getPayloadSize(pkt):
     """ returns payload size of packet"""
     return pkt[3][4]
 
+
+#! DEBUGGING
+
 pkt = makePacket('111.202.230.44', '62.82.29.190', 3, 'HTTP', 80, 3463, 1562431, 8)
-print (pkt)
 print("DEBUG: Packet Created:", pkt)
 print()
 
