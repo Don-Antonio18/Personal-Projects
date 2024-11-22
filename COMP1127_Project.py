@@ -58,10 +58,9 @@ def isEmptyPkt(pkt):
 #PART 2: Creating Selector Functions
 
 def getLength(pkt):
-    """ returns length of packet (everything except tuple tag)"""
-    #* documentation states that tuple should have 4th position but hackkerank expects length of 3....
-    #return len(pkt[1:]) 
-    return len(pkt)
+    """ returns length of packet (everything except tuple tag)
+        Note: length of packet ADT ≠ length of packet """
+    return len(pkt[3][0])
 
 def getProtocol(pkt):
     """ returns protocol of packet"""
