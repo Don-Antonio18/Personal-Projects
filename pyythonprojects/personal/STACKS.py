@@ -22,11 +22,21 @@ def makeStack():
 def contents(s):
     return s[1] # returns 1st elmnt in stack
 
+def top(stack):
+    if not isStackValid(stack):
+        raise ValueError("Argument is not a valid stack.")
+    elif isStackEmpty(stack):
+        raise ValueError("Cannot view the top of an empty stack.")
+    else:
+        return contents(stack)[-1]  # returns top of stack
+    
+
 # stack Predicate / Checker
 def isStackValid(obj):
     ''' checks if arg parameters are 'queue' and type --> list '''
     return type(obj) == tuple and len(obj) == 2 \
-    and obj[0] == "stack" and type(obj[1]) == type([])
+    and obj[0] == "stack" and type(obj[1]) == list
+    
     
 def isStackEmpty(obj):
     if isStackValid(obj):             # returns True if arg is a stack
@@ -34,7 +44,21 @@ def isStackEmpty(obj):
         return contents(obj) == []    # returns True if stack is empty
     else:
         raise TypeError("dequeue; arg must be a stack")
+    
+def pop(s):
+    #removing from top of stack
+    #contents(s).pop()
+    contents(s).pop(0)
 
+def push(stack, item):
+    """
+    Pushes an item onto the stack.
+    """
+    if not isStackValid(stack):
+        raise ValueError("Argument is not a valid stack.")
+    else:
+        contents(stack).append(item)
+    
 def enqueue(s, el):
     #adding to the back
     if isStackValid(s):
@@ -44,11 +68,6 @@ def enqueue(s, el):
         return TypeError(s, "enqueue: Not a Stack")
     contents(s).append(el)  
     
-def pop(s, elmnt):
-    #removing from top of stack
-    #contents(s).pop()
-    contents(s).pop(0)
-    
 def dequeue(s):
     # removing from top
     if not isStackValid(s):
@@ -56,8 +75,10 @@ def dequeue(s):
     else:
         raise IndexError("Queue is empty")
 
-def top(s):
-            #contents(s)[-1] 
-    return contents(s)[0] # returns top of stack
+    
+
+    
+
+
 
 
