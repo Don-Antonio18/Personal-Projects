@@ -1,15 +1,13 @@
-import math
-import os
-import random
-import re
-import sys
 """ 
 Group information:
 Antonio Kerr: 620170333
 Danecia Watt: 
 """
-
-
+import math
+import os
+import random
+import re
+import sys
 #PART 1; creating packet ADT
 def makePacket(srcIP, dstIP, length, prt, sp,dp,sqn, pld):
     return ("PK", srcIP, dstIP, [length, prt, [sp,dp], sqn, pld] )
@@ -85,28 +83,28 @@ def getPayloadSize(pkt):
 #   PART 3: Create Function to Analyse packet
 
 def flowAverage(pkt_list):
-    # Write your code here
+
     if not pkt_list:
         return []  
     
     total_payload = sum(getPayloadSize(pkt) for pkt in pkt_list if isPacket(pkt))
     average_payload = total_payload / len(pkt_list)
-    return [pkt for pkt in pkt_list if getPayloadSize(pkt) > average_payload]
+    return [pkt for pkt in pkt_list if isPacket(pkt) and getPayloadSize(pkt) > average_payload]
     
     
 def suspPort(pkt):
-    # Write your code here
+
     return getSrcPort(pkt) > 500 or getDstPort(pkt) > 500
 
 def suspProto(pkt):
-    # Write your code here
+
     protocol = getProtocol(pkt)
     ProtocolList = ["HTTP","SMTP","UDP","TCP","DHCP"]
     return protocol not in ProtocolList
 
 
 def ipBlacklist(pkt):
-    # Write your code here
+
     src_ip = getPacketSrc(pkt)
     IpBlackList = ["213.217.236.184","444.221.232.94","149.88.83.47","223.70.250.146","169.51.6.136","229.223.169.245"]
     return src_ip in IpBlackList
@@ -114,11 +112,14 @@ def ipBlacklist(pkt):
 
 # Part 4: Score Packet ADT
 
+ProtocolList = ["HTTP","SMTP","UDP","TCP","DHCP"]
+IpBlackList = ["213.217.236.184","444.221.232.94","149.88.83.47","223.70.250.146","169.51.6.136","229.223.169.245"]
+
+
 def calScore(pkt):
     pktscore = 0
-    
     # Check if the packet is in the flow average list
-    if pkt in flowAverage(pkt_list):
+    if pkt in flowAverage(pkt_list): #type: ignore
         pktscore += 3.56
     
     if suspPort(pkt):
@@ -133,6 +134,8 @@ def calScore(pkt):
     return pktscore
 
 
+
+    
 
 def makeScore(pkt_list):
     scorelist = ["SCORE", [(pkt, calScore(pkt)) for pkt in pkt_list if isPacket(pkt)]]
@@ -152,7 +155,6 @@ def getRegulPkts(scorelist):
     
     return [pkt for pkt, score in scorelist[1] if 0 <= calScore(pkt) <= 5.00]
 
-    
 def isScore(scorelist):
     return (
         isinstance(scorelist, list)
@@ -161,26 +163,45 @@ def isScore(scorelist):
         and isinstance(scorelist[1][0], tuple)
     )
 
-
 def isEmptyScore(scorelist):
     return isScore(scorelist) and scorelist[1] == []
 
 
+# PART 5: Packet Queue ADT
 
-pk1 = makePacket("111.202.230.44","62.82.29.190",31,"HTTP",80,20,1562431,38)
-pk2 = makePacket("222.57.155.164","50.168.160.19",22,"UDP",90,5431,1662431,82)
-pk3 = makePacket("333.230.18.207","213.217.236.184",56,"IRC",501,5643,1762431,318)
-pk4 = makePacket("444.221.232.94","50.168.160.19",1003,"TCP",4657,4875,1962431,428)
-pk5 = makePacket("555.221.232.94","50.168.160.19",236,"TCP",7753,5724,2062431,48)
 
-pkt_list = [pkt,pk1,pk2,pk3,pk4]
+def makePacketQueue():
+    return ("PQ" , []) # (packet, list of packetsw)
 
-ProtocolList = ["HTTP","SMTP","UDP","TCP","DHCP"]
-IpBlackList = ["213.217.236.184","444.221.232.94","149.88.83.47","223.70.250.146","169.51.6.136","229.223.169.245"]
+def contentsQ(q): # returns list of packets
+    return q[1]
 
-ScoreList = makeScore(pkt_list)
-addPacket(ScoreList, pk5)
+def frontPacketQ(q):
+    return q[1][0]
+
+def addToPacketQ(pkt,queue):
+    contentsQ(queue).append(pkt)
+
+def get_pos(pkt,lst):
+    if (lst == []):
+        return 0
+    elif getSqn(pkt) < getSqn(lst[0]):
+        return 0 + get_pos(pkt,[])
+    else:
+        return 1 + get_pos(pkt,lst[1:])
+            
+def removeFromPacketQ(queue):
+    if contentsQ(queue):
+        contentsQ(queue).pop(0)
+    else:
+        return []
+
+def isPacketQ(queue):
+    return isinstance(queue, tuple) and queue[0] == "PQ" and isinstance(queue[0], str) and isinstance(queue[1], list) and len(queue) == 2
     
+def isEmptPacketQ(queue):
+    return not isPacketQ(queue) or contentsQ(queue) == [] 
+
 
 
 
