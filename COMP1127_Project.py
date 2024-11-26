@@ -8,7 +8,8 @@ import os
 import random
 import re
 import sys
-#PART 1; creating packet ADT
+
+#PART 1 creating packet ADT
 def makePacket(srcIP, dstIP, length, prt, sp,dp,sqn, pld):
     return ("PK", srcIP, dstIP, [length, prt, [sp,dp], sqn, pld] )
 
@@ -47,7 +48,6 @@ def isPacket(pkt):
     and isinstance(pkt[3][4], int)      \
     and pkt[3][4] >= 0           
     
-    
 def isEmptyPkt(pkt):
     """returns True if pkt is tuple data type & false otherwise"""
     return pkt == () 
@@ -83,7 +83,6 @@ def getPayloadSize(pkt):
 #   PART 3: Create Function to Analyse packet
 
 def flowAverage(pkt_list):
-
     if not pkt_list:
         return []  
     
@@ -93,28 +92,22 @@ def flowAverage(pkt_list):
     
     
 def suspPort(pkt):
-
     return getSrcPort(pkt) > 500 or getDstPort(pkt) > 500
 
 def suspProto(pkt):
-
     protocol = getProtocol(pkt)
     ProtocolList = ["HTTP","SMTP","UDP","TCP","DHCP"]
     return protocol not in ProtocolList
 
-
 def ipBlacklist(pkt):
-
     src_ip = getPacketSrc(pkt)
     IpBlackList = ["213.217.236.184","444.221.232.94","149.88.83.47","223.70.250.146","169.51.6.136","229.223.169.245"]
     return src_ip in IpBlackList
-
 
 # Part 4: Score Packet ADT
 
 ProtocolList = ["HTTP","SMTP","UDP","TCP","DHCP"]
 IpBlackList = ["213.217.236.184","444.221.232.94","149.88.83.47","223.70.250.146","169.51.6.136","229.223.169.245"]
-
 
 def calScore(pkt):
     pktscore = 0
@@ -132,10 +125,6 @@ def calScore(pkt):
         pktscore += 10
 
     return pktscore
-
-
-
-    
 
 def makeScore(pkt_list):
     scorelist = ["SCORE", [(pkt, calScore(pkt)) for pkt in pkt_list if isPacket(pkt)]]
@@ -173,8 +162,15 @@ def isEmptyScore(scorelist):
 def makePacketQueue():
     return ("PQ" , []) # (packet, list of packetsw)
 
-def contentsQ(q): # returns list of packets
-    return q[1]
+#! ADDED DEQUE LIBRARY
+
+from collections import deque 
+import collections
+
+def contentsQ(q): 
+    # returns list of packets
+    queue = collections.deque(q)
+    return queue[0]
 
 def frontPacketQ(q):
     return q[1][0]
@@ -194,7 +190,7 @@ def removeFromPacketQ(queue):
     if contentsQ(queue):
         contentsQ(queue).pop(0)
     else:
-        return []
+        return 0
 
 def isPacketQ(queue):
     return isinstance(queue, tuple) and queue[0] == "PQ" and isinstance(queue[0], str) and isinstance(queue[1], list) and len(queue) == 2
