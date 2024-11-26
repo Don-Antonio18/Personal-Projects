@@ -50,7 +50,6 @@ def isPacket(pkt):
     and pkt[3][4] >= 0           
     
     
-    
 def isEmptyPkt(pkt):
     """returns True if pkt is tuple data type & false otherwise"""
     return pkt == () 
@@ -59,8 +58,8 @@ def isEmptyPkt(pkt):
 
 def getLength(pkt):
     """ returns length of packet (everything except tuple tag)
-        Note: length of packet ADT ≠ length of packet """
-    return len(pkt[3][0])
+        Note: length of packet ADT not equal to length of packet """
+    return pkt[3][0]
 
 def getProtocol(pkt):
     """ returns protocol of packet"""
@@ -81,6 +80,111 @@ def getSqn(pkt):
 def getPayloadSize(pkt):
     """ returns payload size of packet"""
     return pkt[3][4]
+
+
+#   PART 3: Create Function to Analyse packet
+
+def flowAverage(pkt_list):
+    # Write your code here
+    if not pkt_list:
+        return []  
+    
+    total_payload = sum(getPayloadSize(pkt) for pkt in pkt_list if isPacket(pkt))
+    average_payload = total_payload / len(pkt_list)
+    return [pkt for pkt in pkt_list if getPayloadSize(pkt) > average_payload]
+    
+    
+def suspPort(pkt):
+    # Write your code here
+    return getSrcPort(pkt) > 500 or getDstPort(pkt) > 500
+
+def suspProto(pkt):
+    # Write your code here
+    protocol = getProtocol(pkt)
+    ProtocolList = ["HTTP","SMTP","UDP","TCP","DHCP"]
+    return protocol not in ProtocolList
+
+
+def ipBlacklist(pkt):
+    # Write your code here
+    src_ip = getPacketSrc(pkt)
+    IpBlackList = ["213.217.236.184","444.221.232.94","149.88.83.47","223.70.250.146","169.51.6.136","229.223.169.245"]
+    return src_ip in IpBlackList
+
+
+# Part 4: Score Packet ADT
+
+def calScore(pkt):
+    pktscore = 0
+    
+    # Check if the packet is in the flow average list
+    if pkt in flowAverage(pkt_list):
+        pktscore += 3.56
+    
+    if suspPort(pkt):
+        pktscore += 1.45 #Check for suspicious port
+    
+    if suspProto(pkt):  
+        pktscore += 2.74 #Check for suspitious protocol
+    
+    if ipBlacklist(pkt):   
+        pktscore += 10
+
+    return pktscore
+
+
+
+def makeScore(pkt_list):
+    scorelist = ["SCORE", [(pkt, calScore(pkt)) for pkt in pkt_list if isPacket(pkt)]]
+    return scorelist
+
+def addPacket(scorelist, pkt):
+    scorelist[1].append((pkt, calScore(pkt)))
+
+def getSuspPkts(scorelist):
+    if not isScore(scorelist):
+        return []  # Return an empty list if the scorelist is invalid
+    return [pkt for pkt, score in scorelist[1] if calScore(pkt) > 5.00 ]
+    
+def getRegulPkts(scorelist):
+    if not isScore(scorelist):
+        return []  # Return an empty list if the scorelist is invalid
+    
+    return [pkt for pkt, score in scorelist[1] if 0 <= calScore(pkt) <= 5.00]
+
+    
+def isScore(scorelist):
+    return (
+        isinstance(scorelist, list)
+        and scorelist[0] == "SCORE"
+        and isinstance(scorelist[1], list)
+        and isinstance(scorelist[1][0], tuple)
+    )
+
+
+def isEmptyScore(scorelist):
+    return isScore(scorelist) and scorelist[1] == []
+
+
+
+pk1 = makePacket("111.202.230.44","62.82.29.190",31,"HTTP",80,20,1562431,38)
+pk2 = makePacket("222.57.155.164","50.168.160.19",22,"UDP",90,5431,1662431,82)
+pk3 = makePacket("333.230.18.207","213.217.236.184",56,"IRC",501,5643,1762431,318)
+pk4 = makePacket("444.221.232.94","50.168.160.19",1003,"TCP",4657,4875,1962431,428)
+pk5 = makePacket("555.221.232.94","50.168.160.19",236,"TCP",7753,5724,2062431,48)
+
+pkt_list = [pkt,pk1,pk2,pk3,pk4]
+
+ProtocolList = ["HTTP","SMTP","UDP","TCP","DHCP"]
+IpBlackList = ["213.217.236.184","444.221.232.94","149.88.83.47","223.70.250.146","169.51.6.136","229.223.169.245"]
+
+ScoreList = makeScore(pkt_list)
+addPacket(ScoreList, pk5)
+    
+
+
+
+
 
 
 #! DEBUGGING
@@ -105,4 +209,3 @@ print("DEBUG: Destination Port =>", getDstPort(pkt))
 print("DEBUG: Sequence Number =>", getSqn(pkt))
 print("DEBUG: Payload Size =>", getPayloadSize(pkt))
 print()
-
