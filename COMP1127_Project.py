@@ -3,94 +3,70 @@ Group information:
 Antonio Kerr: 620170333
 Danecia Watt: 
 """
+
 import math
 import os
 import random
 import re
 import sys
 
-#PART 1 creating packet ADT
-def makePacket(srcIP, dstIP, length, prt, sp,dp,sqn, pld):
-    return ("PK", srcIP, dstIP, [length, prt, [sp,dp], sqn, pld] )
+
+#Part 1
+def makePacket(srcIP, dstIP, length, prt, sp, dp, sqn, pld):
+    return ("PK", srcIP, dstIP,[length, prt, [sp, dp], sqn, pld])
 
 def getPacketSrc(pkt):
-    """ returns srcIP frm tuple """
-    return pkt[1] 
+    return pkt[1]
 
 def getPacketDst(pkt):
-    """returns dstIP frm tuple"""
-    return pkt[2] 
+    return pkt[2]
 
 def getPacketDetails(pkt):
-    """returns lst with packet details"""
-    return pkt[3] 
+    return pkt[3]
 
 def isPacket(pkt):
-    """makes sure input has meets all conditions of packet adt
-        isinstance() takes in (variable, datatype(s)_to_validate) and returns True/False """
-    return isinstance(pkt, tuple) and pkt[0] == "PK"  and len(pkt) == 4 \
-    and isinstance(pkt[1], str)         \
-    and isinstance(pkt[2], str)         \
-    and isinstance(pkt[3], list)        \
-    and len(pkt[1]) > 0                 \
-    and len(pkt[2]) > 0                 \
-    and len(pkt[3]) == 5                \
-    and isinstance(pkt[3][0], int)      \
-    and isinstance(pkt[3][1], str)      \
-    and pkt[3][1] != ""                 \
-    and isinstance(pkt[3][2], list)     \
-    and len(pkt[3][2]) == 2             \
-    and pkt[3][2] != []                 \
-    and isinstance(pkt[3][2][0], int)   \
-    and isinstance(pkt[3][2][1], int)   \
-    and isinstance(pkt[3][3], int)      \
-    and pkt[3][3] >= 0                  \
-    and isinstance(pkt[3][4], int)      \
-    and pkt[3][4] >= 0           
+    return (
+        isinstance(pkt, tuple) and 
+        len(pkt) == 4 and
+        pkt[0] == "PK" and 
+        isinstance(pkt[1], str) and 
+        isinstance(pkt[2], str) and 
+        isinstance(pkt[3], list) and 
+        len(pkt[3]) == 5
+    )
     
 def isEmptyPkt(pkt):
-    """returns True if pkt is tuple data type & false otherwise"""
-    return pkt == () 
+    return isPacket(pkt) and pkt == ()
 
 #PART 2: Creating Selector Functions
 
 def getLength(pkt):
-    """ returns length of packet (everything except tuple tag)
-        Note: length of packet ADT not equal to length of packet """
     return pkt[3][0]
 
 def getProtocol(pkt):
-    """ returns protocol of packet"""
     return pkt[3][1]
 
 def getSrcPort(pkt):
-    """returns source port of packet"""
     return pkt[3][2][0]
 
 def getDstPort(pkt):
-    """ returns destination port of packet"""
     return pkt[3][2][1]
 
 def getSqn(pkt):
-    """ returns sequence number of packet"""
     return pkt[3][3]
 
 def getPayloadSize(pkt):
-    """ returns payload size of packet"""
     return pkt[3][4]
 
-
-#   PART 3: Create Function to Analyse packet
-
+# Part 3 : Create Function to Analyse packet
 def flowAverage(pkt_list):
     if not pkt_list:
         return []  
-    
+
     total_payload = sum(getPayloadSize(pkt) for pkt in pkt_list if isPacket(pkt))
     average_payload = total_payload / len(pkt_list)
-    return [pkt for pkt in pkt_list if isPacket(pkt) and getPayloadSize(pkt) > average_payload]
-    
-    
+    return [pkt for pkt in pkt_list if getPayloadSize(pkt) > average_payload]
+
 def suspPort(pkt):
     return getSrcPort(pkt) > 500 or getDstPort(pkt) > 500
 
@@ -101,18 +77,18 @@ def suspProto(pkt):
 
 def ipBlacklist(pkt):
     src_ip = getPacketSrc(pkt)
-    IpBlackList = ["213.217.236.184","444.221.232.94","149.88.83.47","223.70.250.146","169.51.6.136","229.223.169.245"]
+
+    IpBlackList = ["213.217.236.184","149.88.83.47","223.70.250.146","169.51.6.136","229.223.169.245"]
     return src_ip in IpBlackList
 
-# Part 4: Score Packet ADT
 
-ProtocolList = ["HTTP","SMTP","UDP","TCP","DHCP"]
-IpBlackList = ["213.217.236.184","444.221.232.94","149.88.83.47","223.70.250.146","169.51.6.136","229.223.169.245"]
+#Part 4: Score Packet Abstract Data Type
 
 def calScore(pkt):
     pktscore = 0
+    
     # Check if the packet is in the flow average list
-    if pkt in flowAverage(pkt_list): #type: ignore
+    if pkt in flowAverage(pkt_list):
         pktscore += 3.56
     
     if suspPort(pkt):
@@ -125,6 +101,8 @@ def calScore(pkt):
         pktscore += 10
 
     return pktscore
+
+
 
 def makeScore(pkt_list):
     scorelist = ["SCORE", [(pkt, calScore(pkt)) for pkt in pkt_list if isPacket(pkt)]]
@@ -143,7 +121,7 @@ def getRegulPkts(scorelist):
         return []  # Return an empty list if the scorelist is invalid
     
     return [pkt for pkt, score in scorelist[1] if 0 <= calScore(pkt) <= 5.00]
-
+    
 def isScore(scorelist):
     return (
         isinstance(scorelist, list)
@@ -155,28 +133,25 @@ def isScore(scorelist):
 def isEmptyScore(scorelist):
     return isScore(scorelist) and scorelist[1] == []
 
-
-# PART 5: Packet Queue ADT
-
-
+#Part 5
 def makePacketQueue():
-    return ("PQ" , []) # (packet, list of packetsw)
+    return ("PQ" , [])
 
-#! ADDED DEQUE LIBRARY
-
-from collections import deque 
-import collections
-
-def contentsQ(q): 
-    # returns list of packets
-    queue = collections.deque(q)
-    return queue[0]
+def contentsQ(q):
+    return q[1]
 
 def frontPacketQ(q):
-    return q[1][0]
+    return q[0]
 
-def addToPacketQ(pkt,queue):
-    contentsQ(queue).append(pkt)
+def addToPacketQ(pkt,q):
+    if calScore(pkt) > 5.00:
+        pass
+    
+    q_contents = contentsQ(q)
+    position = get_pos(pkt,q_contents)
+    q_contents.insert(position, pkt)
+
+    return q
 
 def get_pos(pkt,lst):
     if (lst == []):
@@ -186,20 +161,69 @@ def get_pos(pkt,lst):
     else:
         return 1 + get_pos(pkt,lst[1:])
             
-def removeFromPacketQ(queue):
-    if contentsQ(queue):
-        contentsQ(queue).pop(0)
-    else:
-        return 0
-
-def isPacketQ(queue):
-    return isinstance(queue, tuple) and queue[0] == "PQ" and isinstance(queue[0], str) and isinstance(queue[1], list) and len(queue) == 2
+def removeFromPacketQ(q):
     
-def isEmptPacketQ(queue):
-    return not isPacketQ(queue) or contentsQ(queue) == [] 
+    contentsQ(q).pop(0)
+
+def isPacketQ(q):
+    return isinstance(q, tuple) and len(q) == 2 and q[0] == "PQ" and isinstance(q[1], list)
+    
+
+def isEmptPacketQ(q):
+    return isPacketQ(q) and contentsQ(q) == []
+
+
+# Part 6: Stack ADT
+
+def makePacketStack():
+    return ("PS" , [])
+
+def contentsStack(stk):
+    return stk[1]
+
+def topProjectStack (stk):
+    if isPKstack(stk) == False :
+        raise ValueError("Argument is not a valid stack.")
+    elif isEmptyPKStack(stk):
+        raise ValueError("Cannot view the top of an empty stack.")
+    else:
+        return contentsStack(stk)[-1]  # returns top of stack
+
+
+def pushProjectStack(pkt,stk):
+    if isPacket(pkt):
+        contentsStack(stk).append(pkt)
+    
+    
+def popPickupStack(stk):
+    if not isPKstack(stk) or isEmptyPKStack(stk):
+        raise ValueError("Cannot pop from an invalid or empty stack.")
+    contentsStack(stk).pop()
+
+def isPKstack(stk):
+    if type(stk) == tuple and len(stk) == 2 and stk[0] == "PS" and isinstance(stk[1], list):
+        return True
+    else:
+        return False
 
 
 
+def isEmptyPKStack(stk):
+    if not isPKstack(stk): 
+        return False
+    return contentsStack(stk) == []
+    
+
+
+def sortPackets(scoreList,stack,queue):
+    
+    regular = getRegulPkts(scoreList)
+    sus = getSuspPkts(scoreList)
+    
+    for i in regular:
+        contentsQ(queue).append(i)
+    for elmnt in sus:
+        contentsStack(stack).append(elmnt)
 
 
 
