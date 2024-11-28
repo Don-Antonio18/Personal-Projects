@@ -206,47 +206,49 @@ def isPKstack(stk):
     else:
         return False
 
-
-
 def isEmptyPKStack(stk):
     if not isPKstack(stk): 
         return False
     return contentsStack(stk) == []
     
-
+# Part 7: Sort packet ADT
 
 def sortPackets(scoreList,stack,queue):
     
-    regular = getRegulPkts(scoreList)
-    sus = getSuspPkts(scoreList)
+    [addToPacketQ(packet, queue) for packet in getRegulPkts(scoreList) if isPacket(packet)]
     
-    for i in regular:
-        contentsQ(queue).append(i)
-    for elmnt in sus:
-        contentsStack(stack).append(elmnt)
+    [pushProjectStack(packet, stack) for packet in getSuspPkts(scoreList) if isPacket(packet)]
+    
+    
+    # if isPacket(packet):
+    #     for packet in getSuspPkts(scoreList):
+    #         pushProjectStack(packet, stack)
+    #     for packet in getRegulPkts(scoreList):
+    #         addToPacketQ(packet, queue)
+    
 
 
+#! need to create selector functions for functions which we use index num manually.
 
+#
 
-#! DEBUGGING
+# pkt = makePacket('111.202.230.44', '62.82.29.190', 3, 'HTTP', 80, 3463, 1562431, 8)
+# print("DEBUG: Packet Created:", pkt)
+# print()
 
-pkt = makePacket('111.202.230.44', '62.82.29.190', 3, 'HTTP', 80, 3463, 1562431, 8)
-print("DEBUG: Packet Created:", pkt)
-print()
+# print("DEBUG: Validation Results:")
+# print("Is Tuple:", isinstance(pkt, tuple))
+# print("Starts with 'PK':", pkt[0] == "PK")
+# print("Source IP is String:", isinstance(pkt[1], str))
+# print("Destination IP is String:", isinstance(pkt[2], str))
+# print("Details are List:", isinstance(pkt[3], list))
+# print("Details Length is 5:", len(pkt[3]) == 5)
+# print("Packet Length is 4:", len(pkt) == 4)
+# print()
 
-print("DEBUG: Validation Results:")
-print("Is Tuple:", isinstance(pkt, tuple))
-print("Starts with 'PK':", pkt[0] == "PK")
-print("Source IP is String:", isinstance(pkt[1], str))
-print("Destination IP is String:", isinstance(pkt[2], str))
-print("Details are List:", isinstance(pkt[3], list))
-print("Details Length is 5:", len(pkt[3]) == 5)
-print("Packet Length is 4:", len(pkt) == 4)
-print()
-
-print("DEBUG: Protocol =>", getProtocol(pkt))
-print("DEBUG: Source Port =>", getSrcPort(pkt))
-print("DEBUG: Destination Port =>", getDstPort(pkt))
-print("DEBUG: Sequence Number =>", getSqn(pkt))
-print("DEBUG: Payload Size =>", getPayloadSize(pkt))
-print()
+# print("DEBUG: Protocol =>", getProtocol(pkt))
+# print("DEBUG: Source Port =>", getSrcPort(pkt))
+# print("DEBUG: Destination Port =>", getDstPort(pkt))
+# print("DEBUG: Sequence Number =>", getSqn(pkt))
+# print("DEBUG: Payload Size =>", getPayloadSize(pkt))
+# print()
