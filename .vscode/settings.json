@@ -1,3 +1,4 @@
 {
-    "explorer.fileNesting.enabled": false
+    "explorer.fileNesting.enabled": false,
+    "editor.fontFamily": "'iA Writer Mono S', Menlo, Monaco, 'Courier New', monospace"
 }

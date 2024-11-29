@@ -32,10 +32,10 @@ snake_position = [100, 50]
 
 # defining first 4 blocks of snake
 # body
-snake_body = [  [100, 50],
-                [90, 50],
-                [80, 50],
-                [70, 50]
+snake_body = [  [100, 100],
+                [90, 100],
+                [80, 100],
+                [70, 100]
             ]
 # fruit position 
 fruit_position = [random.randrange(1, (window_x//10)) * 10,
