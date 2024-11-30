@@ -15,6 +15,8 @@ import sys
 def makePacket(srcIP, dstIP, length, prt, sp, dp, sqn, pld):
     return ("PK", srcIP, dstIP,[length, prt, [sp, dp], sqn, pld])
 
+    
+
 def getPacketSrc(pkt):
     return pkt[1]
 
@@ -59,13 +61,17 @@ def getPayloadSize(pkt):
     return pkt[3][4]
 
 # Part 3 : Create Function to Analyse packet
-def flowAverage(pkt_list):
-    if not pkt_list:
+def flowAverage(packet_List
+):
+    if not packet_List:
         return []  
 
-    total_payload = sum(getPayloadSize(pkt) for pkt in pkt_list if isPacket(pkt))
-    average_payload = total_payload / len(pkt_list)
-    return [pkt for pkt in pkt_list if getPayloadSize(pkt) > average_payload]
+    total_payload = sum(getPayloadSize(pkt) for pkt in packet_List
+    if isPacket(pkt))
+    average_payload = total_payload / len(packet_List
+    )
+    return [pkt for pkt in packet_List
+    if getPayloadSize(pkt) > average_payload]
 
 def suspPort(pkt):
     return getSrcPort(pkt) > 500 or getDstPort(pkt) > 500
@@ -88,7 +94,7 @@ def calScore(pkt):
     pktscore = 0
     
     # Check if the packet is in the flow average list
-    if pkt in flowAverage(pkt_list):
+    if pkt in flowAverage(packet_List):
         pktscore += 3.56
     
     if suspPort(pkt):
@@ -103,9 +109,9 @@ def calScore(pkt):
     return pktscore
 
 
-
-def makeScore(pkt_list):
-    scorelist = ["SCORE", [(pkt, calScore(pkt)) for pkt in pkt_list if isPacket(pkt)]]
+def makeScore(packet_List):
+    scorelist = ["SCORE", [(pkt, calScore(pkt)) for pkt in packet_List
+    if isPacket(pkt)]]
     return scorelist
 
 def addPacket(scorelist, pkt):
@@ -133,7 +139,8 @@ def isScore(scorelist):
 def isEmptyScore(scorelist):
     return isScore(scorelist) and scorelist[1] == []
 
-#Part 5
+#Part 5: Create Packet Queue
+
 def makePacketQueue():
     return ("PQ" , [])
 
@@ -219,36 +226,78 @@ def sortPackets(scoreList,stack,queue):
     
     [pushProjectStack(packet, stack) for packet in getSuspPkts(scoreList) if isPacket(packet)]
     
+# PArt 8: Main Driver Function 
+
+'''
+1. Accepts a list of packets
+Format: [(SRC, DST, LEN, PRT, SP, DP, SQN, PLD), (SRC, DST, LEN,
+PRT, SP, DP, SQN, PLD)...]
+
+2. created a packet based on packet ADT
+
+3. analyses each packet in list using funcs from part 3
+
+4. Gets suspicion score for each packet
+
+5. add each packet to a score ADT
+
+6. separates packets into packet queue and packet stack based on part 5 & 6
+
+7. Returns the packet queue in order of highest to lowest sequence number
+
+'''
+
+def analysePackets(packet_List):
     
-    # if isPacket(packet):
-    #     for packet in getSuspPkts(scoreList):
-    #         pushProjectStack(packet, stack)
-    #     for packet in getRegulPkts(scoreList):
-    #         addToPacketQ(packet, queue)
+    """ create packet based on packet ADT """
+    pkt_ADTs = [makePacket(pkt) for pkt in packet_List
+    if isPacket(pkt)]
     
 
+    """ get suspicion score for each packet"""
+    sus_List = [calScore(pkt) for pkt in pkt_ADTs]
+    
+    """ Add each packet to a score ADT"""
+    scoreList = [makeScore(pkt) for pkt in pkt_ADTs]
+    
+    """ separate packets into packet queue and packet stack """
+    queue = makePacketQueue()
+    stack = makePacketStack()
 
-#! need to create selector functions for functions which we use index num manually.
+    sortPackets(scoreList,stack, queue)
+    
+    """ return packet queue in order of highest to lowest sequence num"""
+    sorted_queue = []
+    for pkt in queue:
+        pos = get_pos(pkt, sorted_queue)
+        sorted_queue.insert(pos,pkt)
+        
+    return ('PQ', [(pkt.srcIP, pkt.dstIP, [pkt.length, pkt.prt, [pkt.sp, pkt.dp], pkt.sqn, pkt.pld]) for pkt in sorted_queue])
+    
+    
+    
+    
+first_multiple_input = input().rstrip().split()
+srcIP = str(first_multiple_input[0])
+dstIP = str(first_multiple_input[1])
+length = int(first_multiple_input[2])
+prt = str(first_multiple_input[3])
+sp = int(first_multiple_input[4])
+dp = int(first_multiple_input[5])
+sqn = int(first_multiple_input[6])
+pld = int(first_multiple_input[7])    
+    
+ProtocolList = ["HTTPS","SMTP","UDP","TCP","DHCP","IRC"]
+IpBlackList = ["213.217.236.184","149.88.83.47","223.70.250.146","169.51.6.136","229.223.169.245"]
 
-#
+packet_List = [(srcIP, dstIP, length, prt, sp, dp, sqn, pld),\
+("111.202.230.44","62.82.29.190",31,"HTTP",80,20,1562436,38),\
+("222.57.155.164","50.168.160.19",22,"UDP",90,5431,1662435,82),\
+("333.230.18.207","213.217.236.184",56,"IRC",501,5643,1762434,318),\
+("444.221.232.94","50.168.160.19",1003,"TCP",4657,4875,1962433,428),\
+("555.221.232.94","50.168.160.19",236,"TCP",7753,5724,2062432,48)]
 
-# pkt = makePacket('111.202.230.44', '62.82.29.190', 3, 'HTTP', 80, 3463, 1562431, 8)
-# print("DEBUG: Packet Created:", pkt)
-# print()
+    
+    
 
-# print("DEBUG: Validation Results:")
-# print("Is Tuple:", isinstance(pkt, tuple))
-# print("Starts with 'PK':", pkt[0] == "PK")
-# print("Source IP is String:", isinstance(pkt[1], str))
-# print("Destination IP is String:", isinstance(pkt[2], str))
-# print("Details are List:", isinstance(pkt[3], list))
-# print("Details Length is 5:", len(pkt[3]) == 5)
-# print("Packet Length is 4:", len(pkt) == 4)
-# print()
-
-# print("DEBUG: Protocol =>", getProtocol(pkt))
-# print("DEBUG: Source Port =>", getSrcPort(pkt))
-# print("DEBUG: Destination Port =>", getDstPort(pkt))
-# print("DEBUG: Sequence Number =>", getSqn(pkt))
-# print("DEBUG: Payload Size =>", getPayloadSize(pkt))
-# print()
+    
