@@ -108,6 +108,7 @@ def calScore(pkt):
 
     return pktscore
 
+
 def makeScore(pkt_List):
     scorelist = ["SCORE", [(pkt, calScore(pkt)) for pkt in pkt_List if isPacket(pkt)]]
     return scorelist
@@ -303,3 +304,4 @@ if __name__ == '__main__':
     
     fptr.write('Forward Packets => ' + str(analysePackets(packet_List)) + '\n')
     
+    fptr.close()
