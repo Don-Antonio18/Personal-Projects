@@ -1,18 +1,10 @@
 import sys
 import time
 import random
+""" figure out how to make text blink """
+print("Welcome to Rock, Paper, Scissors!")
+user_input = input("Will you choose Scissors, Paper, or Rock?\n").lower()
 
-def blink_text(text):
-    count = 1
-    while True:
-        sys.stdout.write('\033[5m' + text + '\033[0m')
-        sys.stdout.flush()
-        time.sleep(1.5)
-        sys.stdout.write('\r' + ' ' * len(text) + '\r')
-        sys.stdout.flush()
-        time.sleep(0.5)
-        
-""" Initialise print statements: """
 options = {
     1: ( 
     "    _______",
@@ -41,8 +33,7 @@ options = {
     ),
     }
 
-blink_text("Welcome to Rock Paper Scissors!" ,
-        "Best out of 3 rounds. .😈")
+
 
 running = int(input("Enter s to start, or q to quit." ))
 
@@ -58,7 +49,7 @@ while running == True:
     roll = random.sample(options.items(), 1)
     
     #get user input:
-    user_input = int("Rock (r), paper (p) or scissors (s) ? ")
+    user_input = ("Rock (r), paper (p) or scissors (s) ? ")
     
     
     
