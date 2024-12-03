@@ -3,18 +3,18 @@ import time
 import random
 """ figure out how to make text blink """
 print("Welcome to Rock, Paper, Scissors!")
-user_input = input("Will you choose Scissors, Paper, or Rock?\n").lower()
 
-options = {
-    1: ( 
+
+art = {
+    "rock": ( 
     "    _______",
     "---'   ____)",
             "(_____)",
             "(_____),",
             "(____)",
     "---.__(___)" ),
-
-    2:(
+    
+    "paper":(
         "_______",
     "---'   ____)____",
     "          ______)",
@@ -23,7 +23,7 @@ options = {
     "---.__________)" 
     ),
 
-    3: (
+    "scissors": (
     "    _______)",
     "---'   ____)____",
     "          ______)",
@@ -33,27 +33,23 @@ options = {
     ),
     }
 
-
-
-running = int(input("Enter s to start, or q to quit." ))
-
-if running == "s": running =  True
-if running == "q": running = False
+running = input("Choose Scissors (s), Paper(p), or Rock(r). Press'q to quit. \n").lower()
+if running in ["spr"]: running =  True
+elif running == "q": running = False
+else: print ("You pressed the wrong button there, bud.")
 
 while running == False:
     print("Thanks for playing! 😉")
     exit()
 
 while running == True: 
-    """ randomize bot pick from dictionary"""
-    roll = random.sample(options.items(), 1)
-    
-    #get user input:
     user_input = ("Rock (r), paper (p) or scissors (s) ? ")
+    """ randomize bot pick from options list"""
+    options = ["rock","paper", "scissors"]
+    roll = random.choice(options)
     
+
     
-    
-    pass
 
 
 
