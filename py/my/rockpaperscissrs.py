@@ -33,7 +33,7 @@ art = {
     ),
     }
 
-running = input("Choose Scissors (s), Paper(p), or Rock(r). Press'q to quit. \n").lower()
+running = input("Choose Scissors (s), Paper(p), or Rock(r). Press'q' to quit. \n").lower()
 if running in ["spr"]: running =  True
 elif running == "q": running = False
 else: print ("You pressed the wrong button there, bud.")
