@@ -2,12 +2,14 @@ import os
 import random
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
-from PIL import Image
+from PIL import Image, ImageTk
 import requests
 from io import BytesIO
 import tkinter as tk
 from tkinter import ttk
-from PIL import ImageTk, Image
+from dotenv import load_dotenv
+
+load_dotenv()
 
 class SpotifyAlbumPicker:
     def __init__(self):
