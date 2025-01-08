@@ -29,13 +29,13 @@ public class Life {
         System.out.println();
         world = nextGen(world);
         show(world);
-        Scanner s = new Scanner(System.in);
+        Scanner s = new Scanner(System.in);    
         while(s.nextLine().length() == 0){
             System.out.println();
             world = nextGen(world);
             show(world);
-            
         }
+        s.close(); // Close the Scanner to prevent resource leak
     }
     
     public static boolean[][] nextGen(boolean[][] world){
