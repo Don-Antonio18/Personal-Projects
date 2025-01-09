@@ -7,6 +7,11 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
+
+ //! Things to add:
+ //! 1. separate lists for food, sports, animals
+ //! 2. list showing incorrectly guessed errors so we dont pick it twice
+
 public class Hangman {
     public static void main(String[] args) {
         //? USE EXACT FILE PATH 
@@ -21,16 +26,16 @@ public class Hangman {
         }
         catch(FileNotFoundException e){
             System.out.println("Could not find file");
-            return; // Exit the program if the file is not found
+            return; //? Exit the program if the file is not found
         }
         catch(IOException e ){
             System.out.println("Something went wrong");
-            return; // Exit the program if an IO error occurs
+            return; //? Exit the program if an IO error occurs
         }
 
         if (words.isEmpty()) {
             System.out.println("The words list is empty.");
-            return; // Exit the program if the words list is empty
+            return; //? Exit the program if the words list is empty
         }
 
         Random random = new Random();
@@ -112,8 +117,10 @@ public class Hangman {
     } 
  
 
-    //? RETURNS HANGMAN ART BASED ON # OF WRONG GUESSES
+    
+
     static String getHangmanArt(int wrongGuesses) {
+    //? RETURNS HANGMAN ART BASED ON # OF WRONG GUESSES
 
         return switch(wrongGuesses) {
             /*  -> is a lambda operator meaning that 
