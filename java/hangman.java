@@ -9,7 +9,8 @@ import java.util.Scanner;
 
 public class Hangman {
     public static void main(String[] args) {
-        String filePath = "words.txt";
+        //? USE EXACT FILE PATH 
+       String filePath = "/Users/antoniokerr/Vscode/java/words.txt";
         ArrayList<String> words = new ArrayList<>();
 
         try(BufferedReader reader = new BufferedReader(new FileReader(filePath))){
