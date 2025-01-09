@@ -1,5 +1,15 @@
 import random
 #* ● ┌ ─ ┐ │ └ ┘  
+
+#! Things to add:
+#! 1. make each dice blink one after the other
+#! 2. Make menu blink
+#! 3. add "rolling..." print statement and sleep func before displaying dice
+
+
+
+
+
 running = True
 while running == True: 
     
@@ -92,11 +102,6 @@ while running == True:
         #     total += die
         # print(f"Total: {total}")
             
-#! Things to add:
-#! 1. make each dice blink one after the other
-#! 2. Make menu blink
-#! 3. add "rolling..." print statement and sleep func before displaying dice
-
 
                 
                 
