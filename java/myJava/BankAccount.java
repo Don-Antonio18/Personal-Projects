@@ -1,13 +1,20 @@
 public class BankAccount {
+    
+    //* INITIALIZE VARIABLES AS PRIVATE */
     private String accountNumber;
     private String accountHolder;
     private double balance;
+
+
+    //* PUBLIC CONSTRUCTOR */
 
     public BankAccount(String accountNumber, String accountHolder, double initialBalance) {
         this.accountNumber = accountNumber;
         this.accountHolder = accountHolder;
         this.balance = initialBalance;
     }
+
+    //* METHODS  */
 
     public void deposit(double amount) {
         if (amount > 0) {
