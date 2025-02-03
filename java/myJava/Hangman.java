@@ -22,6 +22,7 @@ public class Hangman {
             String line;
             while((line = reader.readLine()) != null ) {
                words.add(line.trim());
+               
             }
         }
         catch(FileNotFoundException e){
